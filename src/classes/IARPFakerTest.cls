@@ -46,4 +46,11 @@ private class IARPFakerTest {
     	System.assertEquals(inter.profession, 'Interior Designer');    		
     }
     
+    @isTest
+    static void testMakeFakeData() {
+    	List<IARPData> data = IARPFaker.makeIARPData();
+    	
+    	System.assert(data.size() > 0);
+    }
+    
 }

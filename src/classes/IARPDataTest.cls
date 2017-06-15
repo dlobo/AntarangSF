@@ -62,7 +62,7 @@ public class IARPDataTest {
     }
     
     @isTest
-    static void testGetPutData() {
+    static void getPutData() {
     	IARPData data = new IARPData('Sector', 'Profession');
     	
     	data.putStringData('Test Input', new List<String> { 'String 1', 'String 2' });
@@ -75,7 +75,5 @@ public class IARPDataTest {
     	
     	System.assertEquals(data.getBooleanData('AmPresent'), True);
     	System.assertEquals(data.getBooleanData('AmAbsent'), False);    	
-    }
-    
     }
 }

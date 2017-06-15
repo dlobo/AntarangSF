@@ -2,17 +2,17 @@ public class IARPData {
     public String sector { get; set; }
     public String profession { get; set; }
     
-    private Map<String, List<String>> stringData;
-    private Map<String, Boolean> booleanData;
+    public Map<String, List<String>> stringData { get; set; }
+    public Map<String, Boolean> booleanData { get; set; }
 
     public IARPData() {
     	this.sector = null;
     	this.profession = null;
     	
         this.stringData = new Map<String, List<String>> { 
-            'Interest' => new List<String>(), 
-            'Aptitude' => new List<String>(), 
-            'Personality' => new List<String>() 
+            'Interest' => null, 
+            'Aptitude' => null, 
+            'Personality' => null
         };
             
         this.booleanData = new Map<String, Boolean> { 

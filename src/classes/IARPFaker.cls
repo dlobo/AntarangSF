@@ -4,7 +4,7 @@ public class IARPFaker {
         IARPData interiorDesigner = interiorDesigner();
         IARPData actor = actor();
         
-        return new List<IARPData>{ architect, interiorDesigner, actor};
+        return new List<IARPData>{ architect, interiorDesigner, actor };
     }
     
     public static IARPData architect() {
@@ -47,6 +47,23 @@ public class IARPFaker {
         
         Map<String, Boolean> booleans = new Map<String, Boolean>();
         booleans.put('FamilyWomenWork', True);
+        actor.putAllBooleanData(booleans);
+        
+        return actor;
+    }
+
+	// a random IARPData object that should not match any rules at any time
+    public static IARPData mismatch() {
+        IARPData actor = new IARPData('This is a space', 'which does not exist');
+        
+        Map<String, List<String>> strings = new Map<String, List<String>>();
+        strings.put('No Interest', new List<String>{'Artistic', 'Enterprising'});
+        strings.put('No Aptitude', new List<String>{'Verbal', 'Creative'});
+        strings.put('No Personality', new List<String>{'Practical', 'Extrovert', 'Creative', 'Dreamer', 'Adventurous', 'Talkative', 'Bold'});
+        actor.putAllStringData(strings);
+        
+        Map<String, Boolean> booleans = new Map<String, Boolean>();
+        booleans.put('No FamilyWomenWork', True);
         actor.putAllBooleanData(booleans);
         
         return actor;

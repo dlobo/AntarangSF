@@ -27,8 +27,10 @@ public class IARPDataMatcherTest {
 		setup();
 		    	
         IARPDataMatcher matcher = new IARPDataMatcher(rules);
+              
+        System.assertNotEquals(matcher.match(actor, false), null);
+        System.assertNotEquals(matcher.match(actor, true), null);
         
-        System.assertNotEquals(matcher.match(actor), null);
     }    
     
 }

@@ -55,7 +55,7 @@ public class IARPDataMatcher {
 					strictMatch = false;
 				}
 				else {
-					Set<String> studentSet = new Set<String>(student.stringData.get(ruleKey));
+					Set<String> studentSet = new Set<String>(studentList);
 					for (String ruleElement: ruleList) {
 						if (studentSet.contains(ruleElement)) {
 							score = score + 1;
@@ -70,11 +70,15 @@ public class IARPDataMatcher {
 		
 		Map<String, Boolean> ruleBooleanData = rule.booleanData;
 		for (String ruleKey: ruleBooleanData.keySet()) {
-			if (ruleBooleanData.get(ruleKey) == student.booleanData.get(ruleKey)) {
-				score = score + 1;
-			}
-			else {
-				strictMatch = false;
+			Boolean ruleBoolean = ruleBooleanData.get(ruleKey);
+			// do the match check for only true boolean values in the rule
+			if (ruleBoolean) {
+				if (ruleBoolean == student.booleanData.get(ruleKey)) {
+					score = score + 1;
+				}
+				else {
+					strictMatch = false;
+				}
 			}
 		}
 		
@@ -85,9 +89,7 @@ public class IARPDataMatcher {
 			}
 		}
 		else if (score > 0 || strictMatch) {
-			if (strict && strictMatch) {
-				result = new IARPDataMatch(rule, score, strictMatch);
-			}
+			result = new IARPDataMatch(rule, score, strictMatch);
 		}
 		
 		return result;	

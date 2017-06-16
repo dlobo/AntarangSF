@@ -9,8 +9,31 @@
 * and a student-miss (present in student but not in rule) as a negative score
 */
 public class IARPDataMatcher {
-	static boolean strictMatch(IARPData rule, IARPData student) {
-		Boolean result = true;
+	
+	public List<IARPData> rules { get; set; }
+		
+	public IARPDataMatcher(List<IARPData> rules) {
+		this.rules = rules;
+	}
+	
+	public List<IARPDataMatch> match(IARPData student) {
+		List<IARPDataMatch> matches = new List<IARPDataMatch>();
+		
+		for (Integer i = 0; i < rules.size(); i++) {
+			IARPDataMatch result = this.matcher(rules[i], student);
+			if (result != null) {
+				matches.add(result);
+			}			
+		}
+		
+		if (matches.size() > 0) {
+			return matches;
+		}
+		return null;
+	}
+	
+	public IARPDataMatch matcher(IARPData rule, IARPData student) {
+		Boolean strictMatch = true;
 		Integer score = 0;
 
 		// first ensure that all string data matches
@@ -24,7 +47,7 @@ public class IARPDataMatcher {
 						score = score + 1;
 					}
 					else {
-						result = false;
+						strictMatch = false;
 					}					
 				}
 				
@@ -37,12 +60,15 @@ public class IARPDataMatcher {
 				score = score + 1;
 			}
 			else {
-				result = false;
+				strictMatch = false;
 			}
 		}
 		
-		return result;
+		if (score > 0 || strictMatch) {
+			return new IARPDataMatch(rule, score, strictMatch);
+		}
 		
+		return null;		
 	}
     
 }
